@@ -17,16 +17,17 @@ class DeviceViews:
             token = request.headers["Token"]
         else:
             token = ''
-        fields = ["Name", "Serial", "OtherInformation"]
+        fields = ["Name", "Serial", "TypeId","OtherInformation"]
         for field in fields:
             if field not in input_data:
                 return result_creator(status="failure", code=406, message=f"Please enter {field}")
         name = input_data["Name"]
         serial = input_data["Serial"]
+        type_id = input_data["TypeId"]
         other_information = input_data["OtherInformation"]
 
         result, data = DeviceSerializers.admin_create_serializer(
-            token=token, name=name, serial=serial, other_information=other_information)
+            token=token, name=name, serial=serial, type_id=type_id,other_information=other_information)
         if result:
             return result_creator()
         else:

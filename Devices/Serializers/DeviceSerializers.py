@@ -1,4 +1,4 @@
-from Devices.models.devices import Devices
+from Devices.models.devices import Devices, DeviceTypes
 from Authorization.models import Admins, Users
 from Authorization.TokenManager import user_id_to_token, token_to_user_id
 from Devices.Serializers import status_success_result, wrong_token_result, wrong_data_result
@@ -8,7 +8,7 @@ from Authorization.Serializers.AdminSerilizer import AdminSerializers
 class DeviceSerializers:
 
     @staticmethod
-    def admin_create_serializer(token, name, serial, other_information):
+    def admin_create_serializer(token, name, serial, type_id, other_information):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             admin_id = token_result["data"]["user_id"]
@@ -18,14 +18,16 @@ class DeviceSerializers:
                     wrong_data_result["message"] = "You do not have the required access"
                     return False, wrong_data_result
                 try:
+                    type_object = DeviceTypes.objects.get(id=type_id)
                     device = Devices()
                     device.serial = serial
+                    device.type = type_object
                     device.name = name
                     device.other_information = other_information
                     device.save()
                     return True, status_success_result
                 except:
-                    wrong_data_result["message"] = "Duplicate serial"
+                    wrong_data_result["message"] = "Invalid data"
                     return False, wrong_data_result
             wrong_data_result["message"] = "You do not have the required access"
             return False, wrong_data_result
@@ -67,7 +69,7 @@ class DeviceSerializers:
                     filters = {
                         "serial": serial
                     }
-                    if serial is None :
+                    if serial is None:
                         filters['serial'] = ""
                     if 'Staff' in admin.permissions:
                         filters['admin__id'] = admin_id

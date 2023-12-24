@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 from Authorization.models.admins import Admins
 from Authorization.models.users import Users
-
+from .device_types import DeviceTypes
 
 # Create your models here.
 class CustomDeviceManager(models.Manager):
@@ -16,6 +16,12 @@ class CustomDeviceManager(models.Manager):
         for obj in queryset:
             serialized_obj = {
                 "Serial": obj.serial,
+                "Type":{
+                    "Id": obj.type.id,
+                    "Name": obj.type.name,
+                    "OtherInformation": obj.type.other_information,
+                    "CreateDate": obj.type.create_date,
+                },
                 "Admin": obj.admin,
                 "User": obj.user,
                 "Name": obj.name,
@@ -44,6 +50,7 @@ class CustomDeviceManager(models.Manager):
 
 
 class Devices(models.Model):
+    type = models.ForeignKey(DeviceTypes, on_delete=models.CASCADE)
     admin = models.ForeignKey(Admins, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
     serial = models.CharField(max_length=200, primary_key=True, unique=True)
