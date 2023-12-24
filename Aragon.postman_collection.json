@@ -506,6 +506,191 @@
 			]
 		},
 		{
+			"name": "Types",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\":\"Switch2\",\r\n    \"OtherInformation\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/types/admin/create",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"types",
+										"admin",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Id\":\"4a963d44-5d2c-4159-963c-36f8762ae504\",\r\n    \"Name\":\"edited\",\r\n    \"OtherInformation\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/types/admin/edit",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"types",
+										"admin",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"Page\":1,\r\n \"Count\":10,\r\n \"Name\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/types/admin/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"types",
+										"admin",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Id\":\"4a963d44-5d2c-4159-963c-36f8762ae504\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/types/admin/delete",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"types",
+										"admin",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOne",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Id\":\"4a963d44-5d2c-4159-963c-36f8762ae504\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/types/admin/getOne",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"types",
+										"admin",
+										"getOne"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Devices",
 			"item": [
 				{
@@ -524,7 +709,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"Name\":null,\r\n    \"Serial\":\"003\",\r\n    \"OtherInformation\":{}\r\n}",
+									"raw": "{\r\n    \"Name\":null,\r\n    \"TypeId\":\"342b35f4-21bd-4d8f-8776-c0ab50194197\",\r\n    \"Serial\":\"004\",\r\n    \"OtherInformation\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
