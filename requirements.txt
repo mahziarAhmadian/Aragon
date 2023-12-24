@@ -1,0 +1,10 @@
+Django
+psycopg2-binary
+PyJWT
+django-cors-headers
+requests
+paho-mqtt
+termcolor
+django-jalali-date
+persiantools
+pytz

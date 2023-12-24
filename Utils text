@@ -1,0 +1,6 @@
+'Self', 'Admin', 'Category', 'Notice', 'Consumption', 'User', 'WaterMeterProject', 'WaterMeterType', 'WaterMeterModule',
+
+
+INSERT INTO "Admins"  (id,name,last_name,email,is_super_admin,is_staff,password,permissions,other_information,
+create_date) VALUES('ffbdde61-ed60-4972-9223-a44ecd95ab91','mahziar','ahf','ahmadian.mahzi@gmail.com',True,False,'1234',
+ARRAY['Self', 'Admin', 'User', 'Device'],'{}' , '2020-05-17 00:00:00');

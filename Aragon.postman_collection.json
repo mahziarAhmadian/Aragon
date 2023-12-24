@@ -1,0 +1,735 @@
+{
+	"info": {
+		"_postman_id": "bdbd2cff-d769-41f5-8b20-2713f0baa391",
+		"name": "Aragon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\":\"staff2\",\r\n    \"LastName\":\"2\",\r\n    \"Email\":\"staff.2@gmail.com\",\r\n    \"isStaff\":true,\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/admins/admin/create",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"admins",
+										"admin",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Id\":\"07ba9ef3-b00a-449c-b893-0f50c27a8c95\",\r\n    \"Name\":\"MahdiEdited\",\r\n    \"LastName\":\"Saj\",\r\n    \"Email\":\"mahdi.saj@gmail.com\",\r\n    \"isStaff\":true,\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/admins/admin/edit",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"admins",
+										"admin",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Id\":\"d0d64c3e-2ab9-4d7e-b5d1-557eb6b53987\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/admins/admin/delete",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"admins",
+										"admin",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOne",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Id\":\"ffbdde61-ed60-4972-9223-a44ecd95ab91\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/admins/admin/getOne",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"admins",
+										"admin",
+										"getOne"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Page\":1,\r\n    \"Count\":10,\r\n    \"Name\":null,\r\n    \"IsSuperAdmin\":null,\r\n    \"isStaff\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/admins/admin/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"admins",
+										"admin",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"staff.2@gmail.com\",\r\n    \"Password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server_ip}}:{{port}}/admins/admin/login",
+							"host": [
+								"{{server_ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admins",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "CRUD",
+							"item": [
+								{
+									"name": "Create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{staff_admin_token}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Name\":\"end_user3\",\r\n    \"LastName\":\"end_user_last_name\",\r\n    \"Email\":\"end3.user@yahoo.com\",\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server_ip}}:{{port}}/users/admin/staff/create",
+											"host": [
+												"{{server_ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"users",
+												"admin",
+												"staff",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Edit",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{admin_token}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\":\"07ba9ef3-b00a-449c-b893-0f50c27a8c95\",\r\n    \"Name\":\"MahdiEdited\",\r\n    \"LastName\":\"Saj\",\r\n    \"Email\":\"mahdi.saj@gmail.com\",\r\n    \"isStaff\":true,\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server_ip}}:{{port}}/admins/admin/edit",
+											"host": [
+												"{{server_ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"admins",
+												"admin",
+												"edit"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{admin_token}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\":\"0cf4a5c7-8ba0-428a-82e5-4a791ba3903d\"\r\n    }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server_ip}}:{{port}}/users/admin/delete",
+											"host": [
+												"{{server_ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"users",
+												"admin",
+												"delete"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetOne",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{admin_token}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Id\":\"c2aef129-6db2-4a83-9257-422d1dd96b1d\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server_ip}}:{{port}}/users/admin/getOne",
+											"host": [
+												"{{server_ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"users",
+												"admin",
+												"getOne"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetAll",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "{{staff_admin_token}}",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"Page\":1,\r\n    \"Count\":10,\r\n    \"Name\":null\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server_ip}}:{{port}}/users/admin/getAll",
+											"host": [
+												"{{server_ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"users",
+												"admin",
+												"getAll"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Email\":\"end3.user@yahoo.com\",\r\n    \"Password\":\"1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/users/user/login",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"users",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{user_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"name edited\",\r\n    \"LastName\": \"end_user_last_name\",\r\n    \"Email\":\"end2.user@yahoo.com\",\r\n    \"Password\": \"1234\",\r\n    \"OtherInformation\": {}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/users/user/edit",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"users",
+										"user",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetProfile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{user_token}}",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/users/user/getProfile",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"users",
+										"user",
+										"getProfile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Devices",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\":null,\r\n    \"Serial\":\"003\",\r\n    \"OtherInformation\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/admin/create",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"admin",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"Page\":1,\r\n \"Count\":10,\r\n \"Name\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/admin/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"admin",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AssignUser",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{staff_admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserId\":\"484b4862-7791-4529-8aab-5b8d200a93ec\",\r\n    \"Serial\":\"003\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/admin/staff/assignUser",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"admin",
+										"staff",
+										"assignUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOne",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Serial\":\"001\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/admin/getOne",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"admin",
+										"getOne"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{user_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"Page\":1,\r\n \"Count\":10,\r\n \"Serial\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/user/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"user",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetOne",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{user_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Serial\":\"00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/user/getOne",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"user",
+										"getOne"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
