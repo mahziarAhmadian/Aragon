@@ -3,6 +3,7 @@ from Authorization.models import Admins, Users
 from Authorization.TokenManager import user_id_to_token, token_to_user_id
 from Devices.Serializers import status_success_result, wrong_token_result, wrong_data_result
 from Authorization.Serializers.AdminSerilizer import AdminSerializers
+from MQQTService.Publisher import publish_message_to_client
 
 
 class DeviceSerializers:
@@ -147,5 +148,31 @@ class DeviceSerializers:
             except:
                 wrong_data_result["english_message"] = "invalid serial"
                 return False, wrong_data_result
+        else:
+            return False, wrong_token_result
+
+    @staticmethod
+    def user_send_order_serializer(token, serial):
+        token_result = token_to_user_id(token)
+        if token_result["status"] == "OK":
+            user_id = token_result["data"]["user_id"]
+            try:
+                device_object = Devices.objects.get(serial=serial)
+            except:
+                wrong_data_result["message"] = "Invalid serial"
+                return False, wrong_data_result
+            if device_object.user is None :
+                wrong_data_result["message"] = "Invalid data"
+                return False, wrong_data_result
+            if str(device_object.user.id) != str(user_id) :
+                wrong_data_result["message"] = "Invalid data"
+                return False, wrong_data_result
+            prepared_data = {
+                "serial": device_object.serial,
+                "type": device_object.type.name,
+                "state": device_object.state,
+            }
+            publish_message_to_client(data=prepared_data)
+            return True , status_success_result
         else:
             return False, wrong_token_result

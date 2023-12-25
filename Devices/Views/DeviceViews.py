@@ -123,7 +123,7 @@ class DeviceViews:
         if result:
             return result_creator(data=data)
         else:
-            return result_creator(status="failure", code=403, message=data["english_message"])
+            return result_creator(status="failure", code=403, message=data["message"])
 
     @csrf_exempt
     def admin_get_one_view(self, request):
@@ -144,3 +144,23 @@ class DeviceViews:
             return result_creator(data=data)
         else:
             return result_creator(status="failure", code=403, message=data["english_message"])
+
+    @csrf_exempt
+    def user_send_order_view(self, request):
+        if request.method.lower() == "options":
+            return result_creator()
+        input_data = json.loads(request.body)
+        if "Token" in request.headers:
+            token = request.headers["Token"]
+        else:
+            token = ''
+        fields = ["Serial"]
+        for field in fields:
+            if field not in input_data:
+                return result_creator(status="failure", code=406, message=f"Please enter {field}")
+        serial = input_data["Serial"]
+        result, data = DeviceSerializers.user_send_order_serializer(token=token, serial=serial)
+        if result:
+            return result_creator(data=data)
+        else:
+            return result_creator(status="failure", code=403, message=data["message"])

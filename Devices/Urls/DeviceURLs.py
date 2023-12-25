@@ -14,5 +14,6 @@ urlpatterns = [
     # User urls
     path('user/getAll', device_views.user_get_all_views),
     path('user/getOne', device_views.user_get_one_view),
+    path('user/sendOrder', device_views.user_send_order_view),
 
 ]
