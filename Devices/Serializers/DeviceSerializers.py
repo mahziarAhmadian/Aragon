@@ -169,7 +169,7 @@ class DeviceSerializers:
                 return False, wrong_data_result
             prepared_data = {
                 "serial": device_object.serial,
-                "type": device_object.type.name,
+                "type_name": device_object.type.name,
                 "state": device_object.state,
             }
             publish_message_to_client(data=prepared_data)
