@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bdbd2cff-d769-41f5-8b20-2713f0baa391",
+		"_postman_id": "828053d5-7832-4173-aa8c-73b2f6dfd820",
 		"name": "Aragon",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16235564"
 	},
 	"item": [
 		{
@@ -24,7 +25,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"Name\":\"staff2\",\r\n    \"LastName\":\"2\",\r\n    \"Email\":\"staff.2@gmail.com\",\r\n    \"isStaff\":true,\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
+									"raw": "{\r\n    \"Name\":\"staff\",\r\n    \"LastName\":\"2\",\r\n    \"Email\":\"staff.2@gmail.com\",\r\n    \"isStaff\":true,\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -241,7 +242,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"Name\":\"end_user3\",\r\n    \"LastName\":\"end_user_last_name\",\r\n    \"Email\":\"end3.user@yahoo.com\",\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
+											"raw": "{\r\n    \"Name\":\"end_user1\",\r\n    \"LastName\":\"end_user_last_name\",\r\n    \"Email\":\"end1.user@yahoo.com\",\r\n    \"Password\":\"1234\",\r\n    \"OtherInformation\":{}\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -418,7 +419,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"Email\":\"end3.user@yahoo.com\",\r\n    \"Password\":\"1234\"\r\n}",
+									"raw": "{\r\n    \"Email\":\"end1.user@yahoo.com\",\r\n    \"Password\":\"1234\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -524,7 +525,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"Name\":\"Switch2\",\r\n    \"OtherInformation\":{}\r\n}",
+									"raw": "{\r\n    \"Name\":\"Switch\",\r\n    \"OtherInformation\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -709,7 +710,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"Name\":null,\r\n    \"TypeId\":\"342b35f4-21bd-4d8f-8776-c0ab50194197\",\r\n    \"Serial\":\"004\",\r\n    \"OtherInformation\":{}\r\n}",
+									"raw": "{\r\n    \"Name\":null,\r\n    \"TypeId\":\"0700d130-da9b-4389-b09e-bedfe273fa4d\",\r\n    \"Serial\":\"001\",\r\n    \"OtherInformation\":{}\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -779,7 +780,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"UserId\":\"484b4862-7791-4529-8aab-5b8d200a93ec\",\r\n    \"Serial\":\"003\"\r\n}",
+									"raw": "{\r\n    \"UserId\":\"2eafc492-935c-4585-abbd-4c5c00d73ab8\",\r\n    \"Serial\":\"001\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -907,6 +908,41 @@
 										"devices",
 										"user",
 										"getOne"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SendOrder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{user_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Serial\":\"002\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/devices/user/sendOrder",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"devices",
+										"user",
+										"sendOrder"
 									]
 								}
 							},
