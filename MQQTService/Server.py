@@ -1,3 +1,4 @@
+import json
 import random
 import time
 import os
@@ -12,10 +13,22 @@ project_path = Path(base_dir).parent
 sys.path.append(f"{project_path}")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Aragon.settings")
 django.setup()
-# ----------------------------------------------------------------------------------------------------------------------
-# from SayalSanjesh.models import WaterMeters
 
-# ------------------------------------------------get meters serial-----------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+from Devices.models import Devices
+
+
+# ------------------------------------------------add to data base -----------------------------------------------------
+def add_data_to_databse(data):
+    serial = data.get('serial', None)
+    type_name = data.get('type_name', None)
+    state = data.get('state', None)
+    if serial is not None and type is not None and state is not None:
+        # get device object
+        device_object = Devices.objects.filter(serial=serial, type__name=type_name)
+        if len(device_object) == 1:
+            device_object.update(state=state)
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -30,14 +43,18 @@ def on_connect(client, userdata, flags, rc):
     else:
         print("Connection failed")
 
+
 def on_message(client, userdata, message):
     print(f"{message.topic}")
-    print("Message received: " + message.payload.decode("utf-8"))
+    json_data = json.loads(message.payload.decode("utf-8"))
+    print(f"Message received: {json_data}")
+    add_data_to_databse(data=json_data)
+    # print("json_data: " + json_data)
 
 
 broker = '136.243.210.26'
 port = 1883
-topic = "test"
+topic = "/status/response"
 # topic = meter_topics
 
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
