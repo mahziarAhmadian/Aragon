@@ -5,6 +5,7 @@ from Authorization.models.admins import Admins
 from Authorization.models.users import Users
 from .device_types import DeviceTypes
 
+
 # Create your models here.
 class CustomDeviceManager(models.Manager):
 
@@ -16,7 +17,8 @@ class CustomDeviceManager(models.Manager):
         for obj in queryset:
             serialized_obj = {
                 "Serial": obj.serial,
-                "Type":{
+                "State": obj.state,
+                "Type": {
                     "Id": obj.type.id,
                     "Name": obj.type.name,
                     "OtherInformation": obj.type.other_information,
@@ -54,6 +56,7 @@ class Devices(models.Model):
     admin = models.ForeignKey(Admins, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
     serial = models.CharField(max_length=200, primary_key=True, unique=True)
+    state = models.BooleanField(default=False)
     name = models.CharField(max_length=200, null=True)
     other_information = models.JSONField(null=True)
     create_date = models.DateTimeField(
