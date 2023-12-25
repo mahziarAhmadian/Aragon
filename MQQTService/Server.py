@@ -23,7 +23,7 @@ def add_data_to_databse(data):
     serial = data.get('serial', None)
     type_name = data.get('type_name', None)
     state = data.get('state', None)
-    if serial is not None and type is not None and state is not None:
+    if serial is not None and type_name is not None and state is not None:
         # get device object
         device_object = Devices.objects.filter(serial=serial, type__name=type_name)
         if len(device_object) == 1:

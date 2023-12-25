@@ -84,3 +84,11 @@ def publish_message_to_client(data=None, topic='/status'):
     p.publish(topic=topic, message=message)
     time.sleep(0.01)
 
+
+
+# data = {
+#     "serial": "001",
+#     "type_name": "Switch",
+#     "state": False,
+# }
+# publish_message_to_client(data=data)
