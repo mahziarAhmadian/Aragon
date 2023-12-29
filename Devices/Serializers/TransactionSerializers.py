@@ -10,7 +10,7 @@ from MQQTService.Publisher import publish_message_to_client
 class TransactionSerializers:
 
     @staticmethod
-    def create_serializer(token, stripe_code, status, duration, other_information):
+    def user_create_serializer(token, stripe_code, status, duration, other_information):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             user_id = token_result["data"]["user_id"]
@@ -49,5 +49,23 @@ class TransactionSerializers:
                 return True, response
             else:
                 return False, wrong_token_result
+        else:
+            return False, wrong_token_result
+
+    @staticmethod
+    def user_get_all_serializer(token, status, page, count):
+        token_result = token_to_user_id(token)
+        if token_result["status"] == "OK":
+            user_id = token_result["data"]["user_id"]
+            offset = int((page - 1) * count)
+            limit = int(count)
+            filters = {
+                "status": status,
+                "user__id": user_id
+            }
+            filters = {k: v for k, v in filters.items() if v is not None}
+            queryset = Transactions.objects.filter(**filters).order_by('-create_time')[offset:offset + limit]
+            response = Transactions.objects.serialize(queryset=queryset)
+            return True, response
         else:
             return False, wrong_token_result

@@ -17,12 +17,12 @@ from django.urls import path, include
 from Authorization.Urls import AdminURLs, UserURLs
 from Devices.Urls import DeviceURLs
 from Devices.Urls import DeviceTypeURLs
-from Devices.Urls import TransaactionURLs
+from Devices.Urls import TransactionURLs
 
 urlpatterns = [
     path('admins/', include(AdminURLs)),
     path('users/', include(UserURLs)),
     path('devices/', include(DeviceURLs)),
     path('types/', include(DeviceTypeURLs)),
-    path('transactions/', include(TransaactionURLs)),
+    path('transactions/', include(TransactionURLs)),
 ]
