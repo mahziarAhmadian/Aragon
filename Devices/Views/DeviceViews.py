@@ -164,3 +164,25 @@ class DeviceViews:
             return result_creator(data=data)
         else:
             return result_creator(status="failure", code=403, message=data["message"])
+
+    @csrf_exempt
+    def user_devices_view(self, request):
+        if request.method.lower() == "options":
+            return result_creator()
+        input_data = json.loads(request.body)
+        if "Token" in request.headers:
+            token = request.headers["Token"]
+        else:
+            token = ''
+        fields = ["UserIDList"]
+        for field in fields:
+            if field not in input_data:
+                return result_creator(status="failure", code=406, message=f"Please enter {field}")
+        user_id_list = input_data["UserIDList"]
+
+        result, data = DeviceSerializers.user_devices_serializer(
+            token=token, user_id_list=user_id_list)
+        if result:
+            return result_creator(data=data)
+        else:
+            return result_creator(status="failure", code=403, message=data["english_message"])

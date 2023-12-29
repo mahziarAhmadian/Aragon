@@ -161,10 +161,10 @@ class DeviceSerializers:
             except:
                 wrong_data_result["message"] = "Invalid serial"
                 return False, wrong_data_result
-            if device_object.user is None :
+            if device_object.user is None:
                 wrong_data_result["message"] = "Invalid data"
                 return False, wrong_data_result
-            if str(device_object.user.id) != str(user_id) :
+            if str(device_object.user.id) != str(user_id):
                 wrong_data_result["message"] = "Invalid data"
                 return False, wrong_data_result
             prepared_data = {
@@ -173,6 +173,29 @@ class DeviceSerializers:
                 "state": device_object.state,
             }
             publish_message_to_client(data=prepared_data)
-            return True , status_success_result
+            return True, status_success_result
+        else:
+            return False, wrong_token_result
+
+    @staticmethod
+    def user_devices_serializer(token, user_id_list):
+        token_result = token_to_user_id(token)
+        if token_result["status"] == "OK":
+            admin_id = token_result["data"]["user_id"]
+            if AdminSerializers.admin_check_permission(admin_id, 'Admin'):
+                response = []
+                for id in user_id_list:
+                    user_devices = Devices.objects.filter(user__id=id)
+                    queryset = user_devices.order_by('-create_date')
+                    user_response = Devices.objects.serialize(queryset=queryset)
+                    prepared_data = {
+                        "UserID":id ,
+                        "AllUserDeviceCount":user_devices.count() ,
+                        "AllUserDevices" : user_response
+                    }
+                    response.append(prepared_data)
+                return True, response
+            else:
+                return False, wrong_token_result
         else:
             return False, wrong_token_result

@@ -4,7 +4,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from .admins import Admins
 
-
 # Create your models here.
 class CustomUserManager(models.Manager):
 
@@ -30,7 +29,7 @@ class CustomUserManager(models.Manager):
                 "Password": obj.password,
                 "OtherInformation": obj.other_information,
                 "CreateDate": obj.create_date,
-                "Images": obj.images
+                "Images": obj.images,
             }
             serialized_data.append(serialized_obj)
 

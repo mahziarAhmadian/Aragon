@@ -1,4 +1,5 @@
 from Authorization.models import Admins, Users
+from Devices.models.devices import Devices
 from Authorization.TokenManager import user_id_to_token, token_to_user_id
 from Authorization.Serializers import status_success_result, wrong_token_result, wrong_data_result
 from Authorization.Serializers.AdminSerilizer import AdminSerializers
@@ -61,7 +62,7 @@ class UserSerializers:
 
     @staticmethod
     def admin_edit_serializer(
-            token,  name, last_name, email, password, other_information):
+            token, name, last_name, email, password, other_information):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             user_id = token_result["data"]["user_id"]
@@ -139,6 +140,15 @@ class UserSerializers:
                 filters = {k: v for k, v in filters.items() if v is not None}
                 queryset = Users.objects.filter(**filters).order_by('-create_date')[offset:offset + limit]
                 response = Users.objects.serialize(queryset=queryset)
+                for object in response:
+                    user_id = object.get('Id')
+                    queryset = Devices.objects.filter(user__id=user_id).order_by('-create_date')
+                    user_devices_response = Devices.objects.serialize(queryset=queryset)
+                    user_devices  = {
+                        "AllUSerDevicesCount" : queryset.count() ,
+                        "UserDevices" : user_devices_response
+                    }
+                    object['UserDevices'] = user_devices
                 return True, response
             else:
                 return False, wrong_token_result

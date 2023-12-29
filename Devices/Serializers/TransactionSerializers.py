@@ -1,4 +1,5 @@
-from Devices.models.devices import Devices, DeviceTypes, Transactions
+from Devices.models.devices import Devices, DeviceTypes
+from Devices.models.tarnsactions import Transactions
 from Authorization.models import Admins, Users
 from Authorization.TokenManager import user_id_to_token, token_to_user_id
 from Devices.Serializers import status_success_result, wrong_token_result, wrong_data_result

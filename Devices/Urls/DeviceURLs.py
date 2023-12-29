@@ -15,5 +15,6 @@ urlpatterns = [
     path('user/getAll', device_views.user_get_all_views),
     path('user/getOne', device_views.user_get_one_view),
     path('user/sendOrder', device_views.user_send_order_view),
+    path('user/devices', device_views.user_devices_view),
 
 ]
