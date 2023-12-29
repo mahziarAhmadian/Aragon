@@ -30,12 +30,16 @@ class AdminSerializers:
     def admin_login_serializer(email, password):
         try:
             admin = Admins.objects.get(email=email, password=password)
+            is_staff = admin.is_staff
+            is_super_user = admin.is_super_admin
             admin_id = str(admin.id)
             permissions = admin.permissions
             token = user_id_to_token(admin_id, True, token_level="Admin")
 
             result = {
                 "permissions": permissions,
+                "IsStaff": is_staff,
+                "IsSuperUser": is_super_user,
                 "token": token
             }
             return True, result
@@ -60,7 +64,7 @@ class AdminSerializers:
                     admin.password = password
                     admin.is_staff = is_staff
                     admin.is_super_admin = False
-                    admin.permissions = ['Self', 'Admin', 'Staff','User', 'Device']
+                    admin.permissions = ['Self', 'Admin', 'Staff', 'User', 'Device']
                     admin.other_information = other_information
                     admin.save()
                     return True, status_success_result
