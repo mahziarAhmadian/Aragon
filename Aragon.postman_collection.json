@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "828053d5-7832-4173-aa8c-73b2f6dfd820",
+		"_postman_id": "0ef7db51-e62c-4378-88a4-46684cb006af",
 		"name": "Aragon",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16235564"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -196,7 +195,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Email\":\"staff.2@gmail.com\",\r\n    \"Password\":\"1234\"\r\n}",
+							"raw": "{\r\n    \"Email\":\"ahmadian.mahzi@gmail.com\",\r\n    \"Password\":\"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -377,7 +376,7 @@
 										"header": [
 											{
 												"key": "token",
-												"value": "{{staff_admin_token}}",
+												"value": "{{admin_token}}",
 												"type": "default"
 											}
 										],
@@ -943,6 +942,126 @@
 										"devices",
 										"user",
 										"sendOrder"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transactino",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"Page\":1,\r\n \"Count\":10,\r\n \"Status\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/transactions/admin/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"transactions",
+										"admin",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"StripeCode\":\"\",\r\n    \"Status\":\"\",\r\n    \"Duration\":\"\",\r\n    \"OtherInformation\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/transactions/user/create",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"transactions",
+										"user",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{user_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"Page\":1,\r\n \"Count\":10,\r\n \"Status\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/transactions/user/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"transactions",
+										"user",
+										"getAll"
 									]
 								}
 							},
