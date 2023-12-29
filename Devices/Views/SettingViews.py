@@ -51,4 +51,4 @@ class SettingViews:
         if result:
             return result_creator(data=data)
         else:
-            return result_creator(status="failure", code=403, message=data["english_message"])
+            return result_creator(status="failure", code=403, message=data["message"])

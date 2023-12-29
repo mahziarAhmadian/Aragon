@@ -154,12 +154,13 @@ class DeviceViews:
             token = request.headers["Token"]
         else:
             token = ''
-        fields = ["Serial"]
+        fields = ["Serial","State"]
         for field in fields:
             if field not in input_data:
                 return result_creator(status="failure", code=406, message=f"Please enter {field}")
         serial = input_data["Serial"]
-        result, data = DeviceSerializers.user_send_order_serializer(token=token, serial=serial)
+        state = input_data["State"]
+        result, data = DeviceSerializers.user_send_order_serializer(token=token, serial=serial , state=state)
         if result:
             return result_creator(data=data)
         else:

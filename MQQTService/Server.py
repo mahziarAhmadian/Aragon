@@ -54,7 +54,7 @@ def on_message(client, userdata, message):
 
 broker = '136.243.210.26'
 port = 1883
-topic = "/status/response"
+topic = "/status"
 # topic = meter_topics
 
 client_id = f'python-mqtt-{random.randint(0, 1000)}'

@@ -150,7 +150,7 @@ class DeviceSerializers:
             return False, wrong_token_result
 
     @staticmethod
-    def user_send_order_serializer(token, serial):
+    def user_send_order_serializer(token, serial , state):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             user_id = token_result["data"]["user_id"]
@@ -168,7 +168,7 @@ class DeviceSerializers:
             prepared_data = {
                 "serial": device_object.serial,
                 "type_name": device_object.type.name,
-                "state": device_object.state,
+                "state": state,
             }
             publish_message_to_client(data=prepared_data)
             return True, status_success_result

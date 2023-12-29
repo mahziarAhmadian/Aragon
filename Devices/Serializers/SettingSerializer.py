@@ -33,12 +33,11 @@ class SettingSerializers:
             return False, wrong_token_result
 
     @staticmethod
-    def admin_get_all_serializer(token, name, page, count):
+    def admin_get_all_serializer(token,  page, count):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             admin_id = token_result["data"]["user_id"]
             if AdminSerializers.admin_check_permission(admin_id, 'Admin'):
-                admin = Admins.objects.get(id=admin_id)
                 offset = int((page - 1) * count)
                 limit = int(count)
                 queryset = Settings.objects.all()[offset:offset + limit]
