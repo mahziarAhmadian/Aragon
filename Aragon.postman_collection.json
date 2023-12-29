@@ -952,7 +952,7 @@
 			]
 		},
 		{
-			"name": "Transactino",
+			"name": "Transaction",
 			"item": [
 				{
 					"name": "Admin",
@@ -1004,7 +1004,7 @@
 								"header": [
 									{
 										"key": "token",
-										"value": "{{admin_token}}",
+										"value": "{{user_token}}",
 										"type": "default"
 									}
 								],
@@ -1061,6 +1061,86 @@
 									"path": [
 										"transactions",
 										"user",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Information\":{}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/settings/admin/create",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"settings",
+										"admin",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{admin_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"Page\":1,\r\n \"Count\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server_ip}}:{{port}}/settings/admin/getAll",
+									"host": [
+										"{{server_ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"settings",
+										"admin",
 										"getAll"
 									]
 								}
