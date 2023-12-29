@@ -16,7 +16,8 @@ class CustomSettingManager(models.Manager):
         serialized_data = []
         for obj in queryset:
             serialized_obj = {
-                "Information": obj.information,
+                "Id": obj.id,
+                "Information": obj.information
             }
             serialized_data.append(serialized_obj)
 
@@ -24,7 +25,9 @@ class CustomSettingManager(models.Manager):
 
 
 class Settings(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     information = models.JSONField(null=True)
+    bool = models.BooleanField(default=True)
     objects = CustomSettingManager()
 
     class Meta:

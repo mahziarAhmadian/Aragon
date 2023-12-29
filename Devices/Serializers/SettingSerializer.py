@@ -10,7 +10,7 @@ from MQQTService.Publisher import publish_message_to_client
 class SettingSerializers:
 
     @staticmethod
-    def admin_create_serializer(token, information):
+    def admin_edit_serializer(token, information, id):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             admin_id = token_result["data"]["user_id"]
@@ -20,9 +20,7 @@ class SettingSerializers:
                     wrong_data_result["message"] = "You do not have the required access"
                     return False, wrong_data_result
                 try:
-                    setting = Settings()
-                    setting.information = information
-                    setting.save()
+                    Settings.objects.filter(id=id).update(information=information)
                     return True, status_success_result
                 except:
                     wrong_data_result["message"] = "Invalid data"
@@ -33,7 +31,7 @@ class SettingSerializers:
             return False, wrong_token_result
 
     @staticmethod
-    def admin_get_all_serializer(token,  page, count):
+    def admin_get_all_serializer(token, page, count):
         token_result = token_to_user_id(token)
         if token_result["status"] == "OK":
             admin_id = token_result["data"]["user_id"]
