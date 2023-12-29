@@ -18,6 +18,7 @@ from Authorization.Urls import AdminURLs, UserURLs
 from Devices.Urls import DeviceURLs
 from Devices.Urls import DeviceTypeURLs
 from Devices.Urls import TransactionURLs
+from Devices.Urls import SettingURLs
 
 urlpatterns = [
     path('admins/', include(AdminURLs)),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('devices/', include(DeviceURLs)),
     path('types/', include(DeviceTypeURLs)),
     path('transactions/', include(TransactionURLs)),
+    path('settings/', include(SettingURLs)),
 ]
