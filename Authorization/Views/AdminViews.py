@@ -51,7 +51,6 @@ class AdminViews:
         if result:
             return result_creator(data=data)
         else:
-            print(f"in else : {data}")
             return result_creator(status="failure", code=403, message=data["message"])
 
     @csrf_exempt

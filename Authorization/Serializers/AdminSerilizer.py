@@ -54,7 +54,7 @@ class AdminSerializers:
             if AdminSerializers.admin_check_permission(admin_id, 'Admin'):
                 admin_object = Admins.objects.get(id=admin_id)
                 if admin_object.is_super_admin is not True:
-                    wrong_data_result["english_message"] = "You do not have the required access"
+                    wrong_data_result["message"] = "You do not have the required access"
                     return False, wrong_data_result
                 try:
                     admin = Admins()
