@@ -48,8 +48,6 @@ class DeviceSerializers:
                 filters = {
                     "name": name
                 }
-                if 'Staff' in admin.permissions:
-                    filters['admin__id'] = admin_id
                 filters = {k: v for k, v in filters.items() if v is not None}
                 queryset = Devices.objects.filter(**filters).order_by('-create_date')[offset:offset + limit]
                 response = Devices.objects.serialize(queryset=queryset)
