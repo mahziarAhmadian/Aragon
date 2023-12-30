@@ -21,6 +21,8 @@ class CustomTransactionsManager(models.Manager):
                 "OtherInformation": obj.other_information,
                 "CreateTime": obj.create_time,
                 "Duration": obj.duration,
+                "Price": obj.price,
+                "Count": obj.count,
                 "User": {
                     "Id": obj.user.id,
                     "Name": obj.user.name,
@@ -37,9 +39,11 @@ class Transactions(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(Users, on_delete=models.CASCADE, null=True)
     duration = models.CharField(max_length=30)
-    stripe_code = models.CharField(max_length=20)
-    completed_time = models.CharField(max_length=500,null=True)
+    stripe_code = models.CharField(max_length=500)
+    completed_time = models.DateTimeField(null=True)
     status = models.IntegerField()
+    price  = models.IntegerField(null=True)
+    count  = models.IntegerField(null=True)
     other_information = models.JSONField(null=True)
     create_time = models.DateTimeField(
         default=datetime.now, blank=True)
@@ -47,3 +51,4 @@ class Transactions(models.Model):
 
     class Meta:
         db_table = 'Transactions'
+

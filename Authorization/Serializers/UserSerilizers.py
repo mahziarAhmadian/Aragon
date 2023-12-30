@@ -154,3 +154,13 @@ class UserSerializers:
                 return False, wrong_token_result
         else:
             return False, wrong_token_result
+
+    @staticmethod
+    def user_web_hook_serializer(token):
+        token_result = token_to_user_id(token)
+        if token_result["status"] == "OK":
+            user_id = token_result["data"]["user_id"]
+            response = ""
+            return True, response
+        else:
+            return False, wrong_token_result

@@ -46,6 +46,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
     print(f"{message.topic}")
+    print(f'message is : {message.payload.decode("utf-8")}')
     json_data = json.loads(message.payload.decode("utf-8"))
     print(f"Message received: {json_data}")
     add_data_to_databse(data=json_data)

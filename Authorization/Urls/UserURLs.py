@@ -8,6 +8,7 @@ urlpatterns = [
     path('user/login', user_views.user_login_view),
     path('user/getProfile', user_views.user_get_profile_view),
     path('user/edit', user_views.user_edit_view),
+    path('user/webhook', user_views.user_web_hook_view),
     # path('user/getDevices', admins_view.admin_edit_view),
     # # path('user/byTime', admins_view.admin_edit_view),
 
