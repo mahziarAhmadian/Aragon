@@ -71,20 +71,20 @@ class Publisher:
             print(colored('client not connected to broker. can not publish the message!', 'red'))
 
 
-def publish_message_to_client(data=None, topic='/status'):
-    host = '136.243.210.26'
-    port = 1883
-    username = "mark"
-    password = "1234"
+host = '136.243.210.26'
+port = 1883
+username = "mark"
+password = "1234"
 
-    p = Publisher()
-    p.set_username_password(username=username, password=password)
-    p.connect(host=host, port=port)
+p = Publisher()
+p.set_username_password(username=username, password=password)
+p.connect(host=host, port=port)
+
+
+def publish_message_to_client(data=None, topic='/status'):
     message = json.dumps(data)
     p.publish(topic=topic, message=message)
     time.sleep(0.01)
-
-
 
 # data = {
 #     "serial": "001",
