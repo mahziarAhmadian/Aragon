@@ -162,7 +162,7 @@ class UserViews:
     @csrf_exempt
     def user_web_hook_view(self, request):
         stripe.api_key = "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"
-        webhook_secret = "whsec_5gTwVBYnFS9gWb8T3Q6FPdakv1L6R2lQ"
+        webhook_secret = "we_1OVffCI7F31v4fnCDRd4YOe9"
         event = None
         payload = request.body
         sig_header = request.headers['STRIPE_SIGNATURE']
