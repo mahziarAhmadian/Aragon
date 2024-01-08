@@ -162,7 +162,7 @@ class UserViews:
     @csrf_exempt
     def user_web_hook_view(self, request):
         stripe.api_key = "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"
-        webhook_secret = "we_1OVffCI7F31v4fnCDRd4YOe9"
+        webhook_secret = "whsec_MinjsrUFTAxr14PfEvan2ti1il3KzUb4"
         event = None
         payload = request.body
         sig_header = request.headers['STRIPE_SIGNATURE']
@@ -185,7 +185,7 @@ class UserViews:
         elif event['type'] == 'checkout.session.completed':
             session = event['data']['object']
             user_email = session["customer_details"]["email"]
-            amount = (int(session["amount_total"]) / 100) / 100
+            amount = int(int(session["amount_total"]) / 100)
             payment_status = session["payment_status"]
             if payment_status == "paid":
                 queryset = Users.objects.filter(email=user_email)
