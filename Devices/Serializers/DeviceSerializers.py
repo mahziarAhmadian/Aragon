@@ -41,7 +41,7 @@ class ThreadHandler:
         current_time = datetime.now()
         self.__devices_start_time[f'{device_serial}'] = current_time
         user_time_duration = device_object.user.time_duration
-        time_to_shout_down = current_time + timedelta(seconds=user_time_duration)
+        time_to_shout_down = current_time + timedelta(minutes=user_time_duration)
         prepared_data = {
             "serial": device_object.serial,
             "type_name": device_object.type.name,
