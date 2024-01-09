@@ -19,6 +19,9 @@ class ThreadHandler:
         while True:
             if device_serial in self.__alive_device:
                 current_time = datetime.now()
+                # print(
+                #     f"device_serial : {device_serial} -- current_time : {current_time.strftime('%Y-%m-%d %H:%M:%S')} "
+                #     f"-- time_to_shout_down : {time_to_shout_down.strftime('%Y-%m-%d %H:%M:%S')}")
                 if current_time.strftime('%Y-%m-%d %H:%M:%S') == time_to_shout_down.strftime('%Y-%m-%d %H:%M:%S'):
                     # publish turn off to mqtt broker
                     prepared_data = {
@@ -59,7 +62,9 @@ class ThreadHandler:
             self.__alive_device.remove(device_serial)
         if device_serial in list(self.__devices_start_time.keys()):
             user_start_time = self.__devices_start_time[device_serial]
-            time_difference = (current_time - user_start_time).total_seconds()
+            time_difference = (current_time - user_start_time).total_seconds() / 60
+            print(f"current_time : {current_time} -- user_start_time : {user_start_time}")
+            print(f"time_difference : {time_difference}")
             if time_difference > 0:
                 user_object = Users.objects.filter(id=user_id)
                 user_time_duration = list(user_object.values('time_duration'))[0]['time_duration']
@@ -267,6 +272,7 @@ class DeviceSerializers:
                 if state is True:
                     DeviceSerializers.thread_object.start_thread(device_serial=serial)
                 elif state is False:
+                    print("Stop")
                     DeviceSerializers.thread_object.stop_thread(device_serial=serial)
             return True, status_success_result
         else:
