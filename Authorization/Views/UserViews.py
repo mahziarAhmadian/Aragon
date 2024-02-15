@@ -193,7 +193,8 @@ class UserViews:
                 user_time_duration = response[0].get('TimeDuration')
                 if user_time_duration is None:
                     user_time_duration = 0
-                queryset.update(time_duration=user_time_duration + amount)
+                time_duration = (user_time_duration + amount) * 60
+                queryset.update(time_duration=time_duration)
             print(session)
         else:
             print('Unhandled event type {}'.format(event['type']))
