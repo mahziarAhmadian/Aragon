@@ -193,7 +193,8 @@ class UserViews:
                 user_time_duration = response[0].get('TimeDuration')
                 if user_time_duration is None:
                     user_time_duration = 0
-                time_duration = (user_time_duration + amount) * 60
+                final_amount = amount * 1440  # day to minutes
+                time_duration = user_time_duration + final_amount
                 queryset.update(time_duration=time_duration)
             print(session)
         else:
