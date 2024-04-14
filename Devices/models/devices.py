@@ -61,6 +61,7 @@ class Devices(models.Model):
     other_information = models.JSONField(null=True)
     create_date = models.DateTimeField(
         default=datetime.now, blank=True)
+    start_time = models.DateTimeField(null=True, blank=True)
     objects = CustomDeviceManager()
 
     class Meta:

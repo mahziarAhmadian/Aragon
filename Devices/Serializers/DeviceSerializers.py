@@ -95,6 +95,43 @@ class ThreadHandler:
 class DeviceSerializers:
     thread_object = ThreadHandler()
 
+    def add_start_time_to_db(self, device_serial):
+        device_object = Devices.objects.get(serial=device_serial)
+        current_time = datetime.now()
+        # set start time to db
+        device_object.start_time = current_time
+        device_object.save()
+        user_time_duration = device_object.user.time_duration
+        # time_to_shout_down = current_time + timedelta(minutes=user_time_duration)
+        prepared_data = {
+            "serial": device_object.serial,
+            "type_name": device_object.type.name,
+            "state": True,
+            "user_time_duration": user_time_duration
+        }
+        publish_message_to_client(data=prepared_data)
+
+    def add_stop_time_to_db(self, device_serial):
+        current_time = datetime.now()
+        device_object = Devices.objects.get(serial=device_serial)
+        # get device start time
+        start_time = device_object.start_time
+        # Calculate the difference in minutes
+        difference = (current_time - start_time).total_seconds() / 60
+        # get user time
+        user_time_duration = device_object.user.time_duration
+        final_time_duration = user_time_duration - difference
+        if final_time_duration < 0:
+            final_time_duration = 0
+        user_id = device_object.user.id
+        Users.objects.filter(id=user_id).update(time_duration=final_time_duration)
+        prepared_data = {
+            "serial": device_object.serial,
+            "type_name": device_object.type.name,
+            "state": False,
+        }
+        publish_message_to_client(data=prepared_data)
+
     @staticmethod
     def admin_create_serializer(token, name, serial, type_id, other_information):
         token_result = token_to_user_id(token)
@@ -270,10 +307,12 @@ class DeviceSerializers:
                 return False, wrong_data_result
             elif user_time_duration > 0:
                 if state is True:
-                    DeviceSerializers.thread_object.start_thread(device_serial=serial)
+                    DeviceSerializers.add_start_time_to_db(device_serial=serial)
+                    # DeviceSerializers.thread_object.start_thread(device_serial=serial)
                 elif state is False:
                     print("Stop")
-                    DeviceSerializers.thread_object.stop_thread(device_serial=serial)
+                    DeviceSerializers.add_stop_time_to_db(device_serial=serial)
+                    # DeviceSerializers.thread_object.stop_thread(device_serial=serial)
             return True, status_success_result
         else:
             return False, wrong_token_result
