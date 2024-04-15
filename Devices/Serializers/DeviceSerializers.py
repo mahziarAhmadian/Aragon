@@ -6,7 +6,7 @@ from Authorization.TokenManager import user_id_to_token, token_to_user_id
 from Devices.Serializers import status_success_result, wrong_token_result, wrong_data_result
 from Authorization.Serializers.AdminSerilizer import AdminSerializers
 from MQQTService.Publisher import publish_message_to_client
-
+from pytz import utc
 
 class ThreadHandler:
     def __init__(self):
@@ -112,12 +112,13 @@ class DeviceSerializers:
         publish_message_to_client(data=prepared_data)
 
     def add_stop_time_to_db(self, device_serial):
-        current_time = datetime.now()
+        current_time = datetime.now().replace(tzinfo=utc)
         device_object = Devices.objects.get(serial=device_serial)
         # get device start time
-        start_time = device_object.start_time
+        start_time = device_object.start_time.replace(tzinfo=utc)
         # Calculate the difference in minutes
-        difference = (current_time - start_time).total_seconds() / 60
+        print(f"current_time , start_time  :{current_time} , {start_time}")
+        difference = int((current_time - start_time).total_seconds() / 60)
         # get user time
         user_time_duration = device_object.user.time_duration
         final_time_duration = user_time_duration - difference
@@ -307,11 +308,13 @@ class DeviceSerializers:
                 return False, wrong_data_result
             elif user_time_duration > 0:
                 if state is True:
-                    DeviceSerializers.add_start_time_to_db(device_serial=serial)
+                    class_obj = DeviceSerializers()
+                    class_obj.add_start_time_to_db(device_serial=serial)
                     # DeviceSerializers.thread_object.start_thread(device_serial=serial)
                 elif state is False:
                     print("Stop")
-                    DeviceSerializers.add_stop_time_to_db(device_serial=serial)
+                    class_obj = DeviceSerializers()
+                    class_obj.add_stop_time_to_db(device_serial=serial)
                     # DeviceSerializers.thread_object.stop_thread(device_serial=serial)
             return True, status_success_result
         else:
