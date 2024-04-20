@@ -16,6 +16,7 @@ django.setup()
 
 # ----------------------------------------------------------------------------------------------------------------------
 from Devices.models import Devices
+from Authorization.models import Users
 
 
 # ------------------------------------------------add to data base -----------------------------------------------------
@@ -23,11 +24,27 @@ def add_data_to_databse(data):
     serial = data.get('serial', None)
     type_name = data.get('type_name', None)
     state = data.get('state', None)
+    restart = data.get('Restart', None)
+    time_over = data.get('time_over', None)
+
     if serial is not None and type_name is not None and state is not None:
         # get device object
         device_object = Devices.objects.filter(serial=serial, type__name=type_name)
         if len(device_object) == 1:
-            device_object.update(state=state)
+            if restart is not None and restart is False:
+                device_object.update(state=False)
+            elif time_over is not None and time_over is True:
+                device_object.update(state=False)
+                # set user time to 0time_duration
+                for device_obj in device_object:
+                    user_id = device_obj.user.id
+                    user_obj = Users.objects.get(id=user_id)
+                    user_obj.time_duration = 0
+                    user_obj.save()
+
+                pass
+            else:
+                device_object.update(state=state)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
