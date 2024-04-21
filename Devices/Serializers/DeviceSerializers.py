@@ -101,6 +101,7 @@ class DeviceSerializers:
         current_time = datetime.now()
         # set start time to db
         device_object.start_time = current_time
+        device_object.state = True
         device_object.save()
         user_time_duration = device_object.user.time_duration
         # time_to_shout_down = current_time + timedelta(minutes=user_time_duration)
@@ -129,6 +130,7 @@ class DeviceSerializers:
         Users.objects.filter(id=user_id).update(time_duration=final_time_duration)
         # set user device start time to null
         device_object.start_time = None
+        device_object.state = False
         device_object.save()
         prepared_data = {
             "serial": device_object.serial,

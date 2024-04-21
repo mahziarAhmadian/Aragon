@@ -29,21 +29,26 @@ def add_data_to_databse(data):
 
     if serial is not None and type_name is not None and state is not None:
         # get device object
-        device_object = Devices.objects.filter(serial=serial, type__name=type_name)
-        if len(device_object) == 1:
-            if restart is not None and restart is True:
-                update_device = device_object.update(state=False, start_time=None)
-                print("update_device", update_device)
-            elif time_over is not None and time_over is True:
-                device_object.update(state=False, start_time=None)
-                # set user time to 0time_duration
-                for device_obj in device_object:
-                    user_id = device_obj.user.id
-                    user_obj = Users.objects.get(id=user_id)
-                    user_obj.time_duration = 0
-                    user_obj.save()
-            else:
-                device_object.update(state=state)
+        device_object = Devices.objects.get(serial=serial, type__name=type_name)
+        # try:
+        if restart is not None and restart is True:
+            device_object.state = False
+            device_object.start_time = None
+            device_object.save()
+        elif time_over is not None and time_over is True:
+            user_id = device_object.user.id
+            device_object.state = False
+            device_object.start_time = None
+            device_object.save()
+            # set user time to 0time_duration
+            user_obj = Users.objects.get(id=user_id)
+            user_obj.time_duration = 0
+            user_obj.save()
+        else:
+            device_object.state = state
+            device_object.save()
+        # except:
+        #     pass
 
 
 # ----------------------------------------------------------------------------------------------------------------------
