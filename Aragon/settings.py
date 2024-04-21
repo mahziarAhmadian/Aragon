@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Authorization.apps.AuthorizationConfig',
     'Devices.apps.DevicesConfig',
+    'scheduler.apps.SchedulerConfig'
 ]
 
 MIDDLEWARE = [
