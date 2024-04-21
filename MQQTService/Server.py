@@ -32,10 +32,10 @@ def add_data_to_databse(data):
         device_object = Devices.objects.filter(serial=serial, type__name=type_name)
         if len(device_object) == 1:
             if restart is not None and restart is True:
-                update_device = device_object.update(state=False)
+                update_device = device_object.update(state=False, start_time=None)
                 print("update_device", update_device)
             elif time_over is not None and time_over is True:
-                device_object.update(state=False)
+                device_object.update(state=False, start_time=None)
                 # set user time to 0time_duration
                 for device_obj in device_object:
                     user_id = device_obj.user.id

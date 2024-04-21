@@ -8,6 +8,7 @@ from Authorization.Serializers.AdminSerilizer import AdminSerializers
 from MQQTService.Publisher import publish_message_to_client
 from pytz import utc
 
+
 class ThreadHandler:
     def __init__(self):
         self.__alive_device = []
@@ -126,6 +127,9 @@ class DeviceSerializers:
             final_time_duration = 0
         user_id = device_object.user.id
         Users.objects.filter(id=user_id).update(time_duration=final_time_duration)
+        # set user device start time to null
+        device_object.start_time = None
+        device_object.save()
         prepared_data = {
             "serial": device_object.serial,
             "type_name": device_object.type.name,
